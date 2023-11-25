@@ -1,6 +1,8 @@
 #include <iostream>
 #include <random>
 
+#define BITS_PER_BYTE (8)
+
 int main() {
   std::random_device random_device;
   std::mt19937_64 generator(random_device());
@@ -15,7 +17,7 @@ int main() {
   
   while(std::cout.good()) {
     unsigned int random_uint = distribution(generator);
-    for (unsigned int bit_idx = 0; bit_idx < sizeof(unsigned int); ++bit_idx) {
+    for (unsigned int bit_idx = 0; bit_idx < sizeof(unsigned int) * BITS_PER_BYTE; ++bit_idx) {
       std::cout << outputs[!!(random_uint & (1 << bit_idx))] << '\n';
     }
     std::cout.flush();
